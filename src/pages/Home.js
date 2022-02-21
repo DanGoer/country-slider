@@ -1,7 +1,12 @@
 import React from "react";
+import FilterSearch from "../components/filter-search/FilterSearch";
 
 function Home() {
-  return <>Home</>;
+  return (
+    <>
+      <FilterSearch />
+    </>
+  );
 }
 
 export default Home;
