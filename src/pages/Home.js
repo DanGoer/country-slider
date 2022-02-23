@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CountryGrid from "../components/country-grid/CountryGrid";
 import "../index.css";
 import Magni from "../assets/magnifying-glass-solid.svg";
+import Angle from "../assets/angle-down-solid.svg";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -47,30 +48,37 @@ function Home() {
 
   return (
     <>
-      <label>
-        <img style={{ maxWidth: "40px" }} src={Magni} alt="magnifier" />
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          type="text"
-          name="name"
-          placeholder="Search for a country..."
-        />
-      </label>
-      <button onClick={() => handleDisplay()}>Filter by Region</button>
-      <div style={{ display: display }}>
-        {options.map((option) => {
-          return (
-            <div
-              onClick={() => {
-                setDisplay("none");
-                setRegion(option);
-              }}
-            >
-              {option}
-            </div>
-          );
-        })}
-      </div>
+      <span>
+        <label>
+          <img src={Magni} alt="magnifier" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            name="name"
+            placeholder="Search for a country..."
+          />
+        </label>
+        <span className="drop-down">
+          <button onClick={() => handleDisplay()}>
+            <p>Filter by Region</p>
+            <img src={Angle} alt="Angle" />
+          </button>
+          <div className="drop-down-content" style={{ display: display }}>
+            {options.map((option) => {
+              return (
+                <div
+                  onClick={() => {
+                    setDisplay("none");
+                    setRegion(option);
+                  }}
+                >
+                  {option}
+                </div>
+              );
+            })}
+          </div>
+        </span>
+      </span>
       {data && <CountryGrid data={filteredData} />}
     </>
   );
