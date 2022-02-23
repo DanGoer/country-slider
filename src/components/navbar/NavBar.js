@@ -4,25 +4,25 @@ import MoonLight from "../../assets/moon-regular.svg";
 import { ThemeContext, themes } from "../../utils/ThemeContext";
 
 function NavBar() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   return (
     <>
-      <div id="header">
+      <header id="header">
         <h1>Where in the world?</h1>
         <ThemeContext.Consumer>
           {({ changeTheme }) => (
-            <button
+            <div
               onClick={() => {
                 setDarkMode(!darkMode);
                 changeTheme(darkMode ? themes.light : themes.dark);
               }}
             >
               <img src={darkMode ? MoonDark : MoonLight} alt="Moon" />
-              Dark Mode
-            </button>
+              <p>Dark Mode</p>
+            </div>
           )}
         </ThemeContext.Consumer>
-      </div>
+      </header>
     </>
   );
 }
