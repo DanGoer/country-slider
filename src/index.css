@@ -79,6 +79,10 @@ label img {
   background-color: hsl(209, 23%, 22%);
 }
 
+.dark-content .country-card {
+  background-color: hsl(209, 23%, 22%);
+}
+
 /* Dark mode content end */
 
 /* Navbar content */
