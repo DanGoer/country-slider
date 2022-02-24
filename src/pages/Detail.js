@@ -31,32 +31,53 @@ function Detail() {
   useEffect(() => {}, [data[0]]);
 
   return (
-    <>
-      <Link to="/">
+    <div className="detail">
+      <Link className="remove-deco" to="/">
         <button>
           <img src={Arrow} alt="Arrow" />
           Back
         </button>
       </Link>
       {data[0] && (
-        <>
+        <div className="detail-body">
           <img src={data[0].flags.svg} alt="country-flag" />
-          <div>
-            <h2>{data[0].name}</h2>
-            <h5>Native Name: {data[0].nativeName}</h5>
-            <h5>
-              Population:{" "}
-              {data[0].population
-                .toString()
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
-            </h5>
-            <h5>Region: {data[0].region}</h5>
-            <h5>Sub Region: {data[0].subregion}</h5>
-            <h5>Capital: {data[0].capital}</h5>
-            <h5>Top Level Domain: {data[0].topLevelDomain}</h5>
-            <h5>Currencies: {data[0].currencies[0].name}</h5>
-            <h5>Languages: {data[0].languages[0].name}</h5>
-            <div>
+          <div className="detail-body-text">
+            <div className="detail-body-control">
+              <div className="main-detail-text">
+                <h2>{data[0].name}</h2>
+                <h5>
+                  <b>Native Name: </b> {data[0].nativeName}
+                </h5>
+                <h5>
+                  <b>Population: </b>
+                  {data[0].population
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
+                </h5>
+                <h5>
+                  <b>Region: </b>
+                  {data[0].region}
+                </h5>
+                <h5>
+                  <b>Sub Region: </b> {data[0].subregion}
+                </h5>
+                <h5>
+                  <b>Capital: </b> {data[0].capital}
+                </h5>
+              </div>
+              <div className="side-detail-text">
+                <h5>
+                  <b>Top Level Domain: </b> {data[0].topLevelDomain}
+                </h5>
+                <h5>
+                  <b>Currencies: </b> {data[0].currencies[0].name}
+                </h5>
+                <h5>
+                  <b>Languages: </b> {data[0].languages[0].name}
+                </h5>
+              </div>
+            </div>
+            <div className="border-countries">
               Border Countries:{" "}
               {borderData &&
                 borderData.map((borderCountry) => {
@@ -68,9 +89,9 @@ function Detail() {
                 })}
             </div>
           </div>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
