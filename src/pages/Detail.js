@@ -8,6 +8,15 @@ function Detail() {
 
   const [borderData, setBorderData] = useState([]);
   const [data, setData] = useState([]);
+  const [languagesString, setLanguagesString] = useState("");
+
+  const getLanguages = (data) => {
+    let trimmedString = "";
+    data[0].languages.map((language) => {
+      trimmedString += `${language.name}, `;
+    });
+    setLanguagesString(trimmedString.slice(0, -2));
+  };
 
   useEffect(() => {
     axios
@@ -16,15 +25,13 @@ function Detail() {
       )
       .then((response) => {
         setData(response.data);
-        console.log("hallowelt" + JSON.stringify(response.data));
+        getLanguages(response.data);
         const borderArray = response.data[0].borders;
         axios
           .get(`https://restcountries.com/v3.1/alpha?codes=${borderArray}`)
           .then((response) => {
             setBorderData(response.data);
-            console.log("first" + JSON.stringify(response.data[0].borders));
           });
-        console.log("test1" + JSON.stringify(response.data));
       });
   }, [path]);
 
@@ -33,7 +40,7 @@ function Detail() {
   return (
     <div className="detail">
       <Link className="remove-deco" to="/">
-        <button>
+        <button className="back-button">
           <img src={Arrow} alt="Arrow" />
           Back
         </button>
@@ -72,21 +79,34 @@ function Detail() {
                 <h5>
                   <b>Currencies: </b> {data[0].currencies[0].name}
                 </h5>
+
                 <h5>
-                  <b>Languages: </b> {data[0].languages[0].name}
+                  <b>Languages: </b> {languagesString && languagesString}
                 </h5>
               </div>
             </div>
             <div className="border-countries">
-              Border Countries:{" "}
-              {borderData &&
-                borderData.map((borderCountry) => {
-                  return (
-                    <div key={borderCountry.name.common}>
-                      {borderCountry.name.common}
-                    </div>
-                  );
-                })}
+              <h5>
+                <b>Border Countries:</b>
+              </h5>
+              <div className="border-button-bar">
+                {borderData &&
+                  borderData.map((borderCountry) => {
+                    return (
+                      <Link
+                        className="remove-deco"
+                        to={`/${borderCountry.name.common}`}
+                      >
+                        <button
+                          className="border-button"
+                          key={borderCountry.name.common}
+                        >
+                          {borderCountry.name.common}
+                        </button>
+                      </Link>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
