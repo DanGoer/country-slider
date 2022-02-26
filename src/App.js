@@ -4,6 +4,8 @@ import "./index.css";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
 
+// Basic react router v6
+
 function App() {
   return (
     <BrowserRouter>

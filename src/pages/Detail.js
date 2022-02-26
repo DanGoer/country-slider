@@ -2,13 +2,21 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Arrow from "../assets/arrow-left-solid.svg";
+
+// Detail page for the SPA
+// Contains Flag, details and bordercountries links
+
 function Detail() {
+  // Gets information about the address bar
+
   const location = useParams();
   const path = location.nameId;
 
   const [borderData, setBorderData] = useState([]);
   const [data, setData] = useState([]);
   const [languagesString, setLanguagesString] = useState("");
+
+  // Function for creating and formating information from JSON
 
   const getLanguages = (data) => {
     let trimmedString = "";
@@ -17,6 +25,9 @@ function Detail() {
     });
     setLanguagesString(trimmedString.slice(0, -2));
   };
+
+  // After path changes, this fetches new data
+  // Also new data for the border countries is fetched
 
   useEffect(() => {
     axios
@@ -35,16 +46,16 @@ function Detail() {
       });
   }, [path]);
 
-  useEffect(() => {}, [data[0]]);
-
   return (
     <div className="detail">
+      {/* Back to home button */}
       <Link className="remove-deco" to="/">
         <button className="back-button">
           <img src={Arrow} alt="Arrow" />
           Back
         </button>
       </Link>
+      {/* After succesful fetching data, this renders the info panel */}
       {data[0] && (
         <div className="detail-body">
           <img src={data[0].flags.svg} alt="country-flag" />
@@ -79,7 +90,7 @@ function Detail() {
                 <h5>
                   <b>Currencies: </b> {data[0].currencies[0].name}
                 </h5>
-
+                {/* After succesful fetching data, this renders the spoken languages */}
                 <h5>
                   <b>Languages: </b> {languagesString && languagesString}
                 </h5>
@@ -89,6 +100,7 @@ function Detail() {
               <h5>
                 <b>Border Countries:</b>
               </h5>
+              {/* After succesful fetching data, this renders the border countries */}
               <div className="border-button-bar">
                 {borderData &&
                   borderData.map((borderCountry) => {

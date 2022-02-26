@@ -5,6 +5,9 @@ import "../index.css";
 import Magni from "../assets/magnifying-glass-solid.svg";
 import Angle from "../assets/angle-down-solid.svg";
 
+// Main and landing page for the SPA
+// Contains searchfilter, categoryfilter and CountryGrid
+
 function Home() {
   const [data, setData] = useState([]);
   const [display, setDisplay] = useState("none");
@@ -13,10 +16,14 @@ function Home() {
   const [search, setSearch] = useState("");
 
   const options = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
-  console.log("search" + search);
+
+  // After region changes, data will be filtered by region
+
   useEffect(() => {
     setFilteredData(data.filter((country) => country.region === region));
   }, [region]);
+
+  // Handles the logic for dropdown menu
 
   function handleDisplay() {
     if (display === "none") {
@@ -27,6 +34,8 @@ function Home() {
     }
   }
 
+  // Initial data fetch
+
   useEffect(() => {
     axios
       .get(
@@ -35,9 +44,10 @@ function Home() {
       .then((response) => {
         setData(response.data);
         setFilteredData(response.data);
-        console.log("test1" + JSON.stringify(response.data));
       });
   }, []);
+
+  // After the input in search changes, list of countries gets filtered live
 
   useEffect(() => {
     const filterCountry = data.filter((country) =>
@@ -49,6 +59,7 @@ function Home() {
   return (
     <>
       <span>
+        {/* SearchFilter input */}
         <label>
           <img src={Magni} alt="magnifier" />
           <input
@@ -58,6 +69,7 @@ function Home() {
             placeholder="Search for a country..."
           />
         </label>
+        {/* CategoryFilter drop down menu */}
         <span className="drop-down">
           <button onClick={() => handleDisplay()}>
             <p>Filter by Region</p>
@@ -80,6 +92,7 @@ function Home() {
           </div>
         </span>
       </span>
+      {/* CountryCardGrid */}
       {data && <CountryGrid data={filteredData} />}
     </>
   );

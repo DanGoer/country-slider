@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import ThemeContextWrapper from "./utils/ThemeContextWrapper";
 
+// Themewrapper for dark mode
+
 ReactDOM.render(
   <ThemeContextWrapper>
     <React.StrictMode>
