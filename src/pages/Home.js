@@ -15,7 +15,7 @@ function Home() {
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
 
-  const options = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+  const options = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   // After region changes, data will be filtered by region
 
